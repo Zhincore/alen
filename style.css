@@ -22,6 +22,40 @@ body{
 }
 
 
+#inputgroup-rays{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: -24px;
+}
+#inputgroup-rays > input[type="checkbox"]{
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 2px;
+  border: 2px solid #717171;
+  padding: 2px;
+  width: 18px;
+  height: 18px;
+  position: relative;
+  cursor: pointer;
+}
+#inputgroup-rays > input[type="checkbox"]:checked::after {
+  font-family: "Font Awesome 5 Free"; font-weight: 900; content: "\f00c";
+  font-size: 12px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#input-rayR{ border-color: #ff0000aa !important; }
+#input-rayR:checked{ border-color: #ff0000 !important; }
+#input-rayG{ border-color: #00ff00aa !important; }
+#input-rayG:checked{ border-color: #00ff00 !important; }
+#input-rayB{ border-color: #0000ffaa !important; }
+#input-rayB:checked{ border-color: #0000ff !important; }
+
 #overlay{
   position: absolute;
   top: 0;

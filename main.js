@@ -129,6 +129,16 @@ function rotateVector(vec, ang){
   return new Array(Math.round(10000*(vec[0] * cos - vec[1] * sin))/10000, Math.round(10000*(vec[0] * sin + vec[1] * cos))/10000);
 }
 
+function getObject(){
+  let image = $("#img-tree")[0];
+  let objPos = [objectPosX+image.naturalWidth/2, conf.c.y-image.naturalHeight-objectPosY];
+  return {
+    pos: objPos,
+    img: image,
+    width: image.naturalWidth,
+    height: image.naturalHeight
+  };
+}
 
 //
 // App
@@ -147,6 +157,9 @@ $(document).ready(() => {
     .css("left", conf.c.x-32-87)
     .val()
   );
+  $("#inputgroup-rays")
+    .css("top", conf.c.y-$("#inputgroup-rays").height()*1.5)
+  ;
   /*objectPosY = parseInt($("#input-objectposy")
     .css("top", conf.c.y-32-127)
     .val()
@@ -186,10 +199,11 @@ $(document).ready(() => {
     
     //////
     /// Object and its image
-    ctx.drawImage($("#img-tree")[0], objectPosX, conf.c.y-64-objectPosY, 32, 64);
+    let obj = getObject();
+    ctx.drawImage(obj.img, obj.pos[0], obj.pos[1], 32, 64);
     let image = genImage(
       radius/2, //f
-      -conf.c.x+objectPosX+16, //u
+      -conf.c.x+obj.pos[0], //u
       64 //h0
     );
 
@@ -204,25 +218,31 @@ $(document).ready(() => {
       //////
       /// Rays
       ctx.lineWidth = 2;
-      ctx.strokeStyle = "rgba(255, 0, 0, .5)";
-      ctx.beginPath();
-      ctx.moveTo(objectPosX+16, conf.c.y-64-objectPosY+2);
-      ctx.lineTo(conf.c.x, conf.c.y-64-objectPosY+2);
-      ctx.lineTo(conf.c.x+image[0], conf.c.y-image[1]+objectPosY*2-2);
-      ctx.stroke();
+      if($("#input-rayR")[0].checked){
+        ctx.strokeStyle = "rgba(255, 0, 0, .5)";
+        ctx.beginPath();
+        ctx.moveTo(obj.pos[0]+obj.width/2, obj.pos[1]+2);
+        ctx.lineTo(conf.c.x, obj.pos[1]+2);
+        ctx.lineTo(conf.c.x+image[0], conf.c.y-image[1]+objectPosY*2-2);
+        ctx.stroke();
+      }
       
-      ctx.strokeStyle = "rgba(0, 255, 0, .5)";
-      ctx.beginPath();
-      ctx.moveTo(objectPosX+16, conf.c.y-64-objectPosY+2);
-      ctx.lineTo(conf.c.x+image[0], conf.c.y-image[1]+objectPosY*2-2);
-      ctx.stroke();
+      if($("#input-rayG")[0].checked){
+        ctx.strokeStyle = "rgba(0, 255, 0, .5)";
+        ctx.beginPath();
+        ctx.moveTo(obj.pos[0]+obj.width/2, obj.pos[1]+2);
+        ctx.lineTo(conf.c.x+image[0], conf.c.y-image[1]+objectPosY*2-2);
+        ctx.stroke();
+      }
       
-      ctx.strokeStyle = "rgba(0, 0, 255, .5)";
-      ctx.beginPath();
-      ctx.moveTo(conf.c.x+image[0], conf.c.y-image[1]+objectPosY*2-2);
-      ctx.lineTo(conf.c.x, conf.c.y-image[1]+objectPosY-2);
-      ctx.lineTo(objectPosX+16, conf.c.y-64-objectPosY+2);
-      ctx.stroke();
+      if($("#input-rayB")[0].checked){
+        ctx.strokeStyle = "rgba(0, 0, 255, .5)";
+        ctx.beginPath();
+        ctx.moveTo(conf.c.x+image[0], conf.c.y-image[1]+objectPosY*2-2);
+        ctx.lineTo(conf.c.x, conf.c.y-image[1]+objectPosY-2);
+        ctx.lineTo(obj.pos[0]+obj.width/2, obj.pos[1]+2);
+        ctx.stroke();
+      }
       
     }else{
       ctx.fillStyle = "red";
