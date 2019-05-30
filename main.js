@@ -24,6 +24,7 @@ let lenCircleRight;
 let lenFocusRight;
 let lenCenterRight;
 
+let lang;
 
 //
 // Functions
@@ -114,6 +115,20 @@ function drawLen(ctx){
 }
 
 
+function updateLen(r){
+  radius = r;
+  lenLeft = genLen(r);
+  lenCircleLeft = genLenCircle(r);
+  lenFocusLeft = genLenPoint(r/2);
+  lenCenterLeft = genLenPoint(r);
+  
+  lenRight = genLen(-r);
+  lenCircleRight = genLenCircle(-r);
+  lenFocusRight = genLenPoint(-r/2);
+  lenCenterRight = genLenPoint(-r);  
+}
+
+
 function vectorAngle(ax, ay, bx, by){
   return Math.atan2(by - ay, bx - ax);
 }
@@ -129,9 +144,10 @@ function rotateVector(vec, ang){
   return new Array(Math.round(10000*(vec[0] * cos - vec[1] * sin))/10000, Math.round(10000*(vec[0] * sin + vec[1] * cos))/10000);
 }
 
+
 function getObject(){
   let image = $("#img-tree")[0];
-  let objPos = [objectPosX+image.naturalWidth/2, conf.c.y-image.naturalHeight-objectPosY];
+  let objPos = [objectPosX+image.naturalWidth, conf.c.y-image.naturalHeight-objectPosY];
   return {
     pos: objPos,
     img: image,
@@ -150,11 +166,15 @@ $(document).ready(() => {
   const canvas = $("canvas#canvas").get(0);
   const ctx = canvas.getContext('2d');
   
+  $(".trn").translate(lang);
+  
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
   
-  radius = parseInt($("#input-lenradius")
+  radius = parseInt($("#inputgroup-lenradius")
     .css("left", conf.c.x-32-87)
+    .children("#input-lenradius")
+    .val($("#input-lenradius-num").val())
     .val()
   );
   $("#inputgroup-rays")
@@ -200,7 +220,7 @@ $(document).ready(() => {
     //////
     /// Object and its image
     let obj = getObject();
-    ctx.drawImage(obj.img, obj.pos[0], obj.pos[1], 32, 64);
+    ctx.drawImage(obj.img, obj.pos[0]-obj.width/2, obj.pos[1], 32, 64);
     let image = genImage(
       radius/2, //f
       -conf.c.x+obj.pos[0], //u
@@ -208,7 +228,7 @@ $(document).ready(() => {
     );
 
     // Don't let the image of object teleport to outer space
-    if(objectPosX+16 < lenFocusRight.pos.x){
+    if(obj.pos[0] < lenFocusRight.pos.x){
       if(image[1] < 0) ctx.scale(1, -1);// It is expected that the image will always be flipped
       ctx.globalAlpha = 0.75;
       ctx.drawImage($("#img-tree")[0], conf.c.x-16+image[0], -conf.c.y-objectPosY, 32, image[1]-objectPosY);
@@ -221,7 +241,7 @@ $(document).ready(() => {
       if($("#input-rayR")[0].checked){
         ctx.strokeStyle = "rgba(255, 0, 0, .5)";
         ctx.beginPath();
-        ctx.moveTo(obj.pos[0]+obj.width/2, obj.pos[1]+2);
+        ctx.moveTo(obj.pos[0], obj.pos[1]+2);
         ctx.lineTo(conf.c.x, obj.pos[1]+2);
         ctx.lineTo(conf.c.x+image[0], conf.c.y-image[1]+objectPosY*2-2);
         ctx.stroke();
@@ -230,7 +250,7 @@ $(document).ready(() => {
       if($("#input-rayG")[0].checked){
         ctx.strokeStyle = "rgba(0, 255, 0, .5)";
         ctx.beginPath();
-        ctx.moveTo(obj.pos[0]+obj.width/2, obj.pos[1]+2);
+        ctx.moveTo(obj.pos[0], obj.pos[1]+2);
         ctx.lineTo(conf.c.x+image[0], conf.c.y-image[1]+objectPosY*2-2);
         ctx.stroke();
       }
@@ -240,13 +260,14 @@ $(document).ready(() => {
         ctx.beginPath();
         ctx.moveTo(conf.c.x+image[0], conf.c.y-image[1]+objectPosY*2-2);
         ctx.lineTo(conf.c.x, conf.c.y-image[1]+objectPosY-2);
-        ctx.lineTo(obj.pos[0]+obj.width/2, obj.pos[1]+2);
+        ctx.lineTo(obj.pos[0], obj.pos[1]+2);
         ctx.stroke();
       }
       
     }else{
       ctx.fillStyle = "red";
-      ctx.fillText('Cannot create image', conf.c.x+32, conf.c.y+32);
+      let text = $('<span data-trn="imageCreationError"></span>').translate(lang).text();
+      ctx.fillText(text, conf.c.x+32, conf.c.y+32);
     }
     
     //////
@@ -260,19 +281,18 @@ $(document).ready(() => {
   
 });
 
+$("#input-lang").on("input change", ()=>{
+  lang = $("#input-lang").val();
+  $(".trn").translate(lang);
+}).trigger("change");
 
+$("#input-lenradius-num").on("input change", ()=>{
+  let r = parseInt($("#input-lenradius").val($("#input-lenradius-num").val()).val());
+  updateLen(r);
+});
 $("#input-lenradius").on("input change", ()=>{
-  let r = parseInt($("#input-lenradius").val());
-  radius = r;
-  lenLeft = genLen(r);
-  lenCircleLeft = genLenCircle(r);
-  lenFocusLeft = genLenPoint(r/2);
-  lenCenterLeft = genLenPoint(r);
-  
-  lenRight = genLen(-r);
-  lenCircleRight = genLenCircle(-r);
-  lenFocusRight = genLenPoint(-r/2);
-  lenCenterRight = genLenPoint(-r);
+  let r = parseInt($("#input-lenradius-num").val($("#input-lenradius").val()).val());
+  updateLen(r);
 });
 
 $("#input-objectposy").on("input change", ()=>{

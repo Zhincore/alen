@@ -9,6 +9,11 @@
 <body>
   
   <div id="overlay">
+    <select id="input-lang">
+      <option>cs</option>
+      <option>en</option>
+    </select>
+  
     <div id="inputgroup-rays">
       <input id="input-rayR" type="checkbox" checked>
       <input id="input-rayG" type="checkbox" checked>
@@ -18,7 +23,10 @@
     <!--input id="input-objectposy" orient="vertical" type="range" max="128" min="0" step="0.1" value="0" autocomplete="off"-->
     <input id="input-objectposx" type="range" max="332" min="48" step="1" value="48" autocomplete="off">
     
-    <input id="input-lenradius" type="range" max="1024" min="1" step="0.1" value="64">
+    <div id="inputgroup-lenradius">
+      <div><span class="trn" data-trn="focal distance">Ohnisková vzdálenost</span>: <input id="input-lenradius-num" type="number" max="1024" min="1" step="0.1" value="173">px</div>
+      <input id="input-lenradius" type="range" max="1024" min="1" step="0.1">
+    </div>
   </div>
   
   <canvas id="canvas" width="1920" height="1080"></canvas>
@@ -28,6 +36,7 @@
   </div>
   
   <script src="lib/jquery-3.4.1.min.js"></script>
+  <script src="translate.js"></script>
   <script src="main.js"></script>
 </body>
 </html>

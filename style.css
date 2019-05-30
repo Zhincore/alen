@@ -66,9 +66,23 @@ body{
   border-width: 32px 0 0 32px;
 }
 
-#input-lenradius{
+#input-lang{
   position: absolute;
+  top: -30px;
+  left: -30px;
+}
+
+#inputgroup-lenradius{
+  position: absolute;
+  top: -24px;
   left: 0;
+}
+#inputgroup-lenradius input#input-lenradius-num{
+  width: 80px;
+}
+#inputgroup-lenradius input#input-lenradius{
+  width: 100%;
+  margin-top: 4px;
 }
 
 #input-objectposy{
