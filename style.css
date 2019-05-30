@@ -22,39 +22,6 @@ body{
 }
 
 
-#inputgroup-rays{
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 0;
-  left: -24px;
-}
-#inputgroup-rays > input[type="checkbox"]{
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  appearance: none;
-  margin: 2px;
-  border: 2px solid #717171;
-  padding: 2px;
-  width: 18px;
-  height: 18px;
-  position: relative;
-  cursor: pointer;
-}
-#inputgroup-rays > input[type="checkbox"]:checked::after {
-  font-family: "Font Awesome 5 Free"; font-weight: 900; content: "\f00c";
-  font-size: 12px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-#input-rayR{ border-color: #ff0000aa !important; }
-#input-rayR:checked{ border-color: #ff0000 !important; }
-#input-rayG{ border-color: #00ff00aa !important; }
-#input-rayG:checked{ border-color: #00ff00 !important; }
-#input-rayB{ border-color: #0000ffaa !important; }
-#input-rayB:checked{ border-color: #0000ff !important; }
 
 #overlay{
   position: absolute;
@@ -65,6 +32,30 @@ body{
   border: solid #4a4a4a;
   border-width: 32px 0 0 32px;
 }
+
+#inputgroup-rays{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: -24px;
+}
+
+#input-rayR{ border-color: #ff0000aa !important; }
+#input-rayR:checked{ border-color: #ff0000 !important; }
+#input-rayG{ border-color: #00ff00aa !important; }
+#input-rayG:checked{ border-color: #00ff00 !important; }
+#input-rayB{ border-color: #0000ffaa !important; }
+#input-rayB:checked{ border-color: #0000ff !important; }
+
+#opt-show-radius{ border-color: #aa00ff !important; }
+#opt-show-focus{ border-color: #ff2200 !important; }
+#opt-show-objpos{ border-color: #ff8800 !important; }
+#opt-show-imgpos{ border-color: #00ffaa !important; }
+
+#opt-show-lenCircles{ border-color: #00ffff !important; }
+#opt-show-lenFocus{ border-color: #FF4000 !important; }
+#opt-show-lenCenter{ border-color: #0060FF !important; }
 
 #input-lang{
   position: absolute;
@@ -99,6 +90,27 @@ body{
   left: 42px;
 }
 
+input[type="checkbox"]{
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 2px;
+  border: 2px solid #717171;
+  padding: 2px;
+  width: 18px;
+  height: 18px;
+  position: relative;
+  cursor: pointer;
+}
+input[type="checkbox"]:checked::after {
+  font-family: "Font Awesome 5 Free"; font-weight: 900; content: "\f00c";
+  font-size: 12px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 input[type=range]{
   -moz-appearance: none;
   -webkit-appearance: none;
@@ -129,4 +141,48 @@ input[type=range][orient=vertical]
     -webkit-appearance: slider-vertical; /* WebKit */
     width: 8px;
     height: 175px;
+}
+
+#overlay-info{
+  position: absolute;
+  right: 0;
+  top: -32px;
+  height: 100%;
+  text-align: right;
+}
+#overlay-info #info-toggler{
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: 24px;
+  text-decoration: none;
+}
+
+#info{
+  height: 100%;
+  background-color: #313131;
+  border: 2px solid #80808040;
+  padding: 16px;
+  text-align: left;
+}
+
+#info table#info-table {
+  margin: 16px 0;
+}
+
+#info table th, #info table td{
+  padding: 8px 16px;
+}
+
+#info .math{
+  font-family: mono;
+  min-width: 132px;
+  padding-right: 1ex;
+}
+#info .math-sign{
+  font-family: mono;
+  text-align: right;
+  padding-right: 0;
+}
+#info .unit{
+  padding-left: 0;
 }

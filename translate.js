@@ -7,6 +7,46 @@
         "focal distance":{
           cs: "Ohnisková vzdálenost",
           en: "Focal distance"
+        },
+        "object distance":{
+          cs: "Předmětová vzdálenost",
+          en: "Object distance"
+        },
+        "image distance":{
+          cs: "Obrazová vzdálenost",
+          en: "Image distance"
+        },
+        "magnification":{
+          cs: "Poměr zvětšení",
+          en: "Magnification ratio"
+        },
+        "pixels":{
+          cs: "pixelů",
+          en: "pixels"
+        },
+        "lenRadius":{
+          cs: "Poloměr čočky",
+          en: "Len radius"
+        },
+        "centre":{
+          cs: "Vystředit",
+          en: "Centre"
+        },
+        "showLenCircles": {
+          cs: "Zobrazit kružnice čočky",
+          en: "Show circles of lens"
+        },
+        "showLenLeftPoints": {
+          cs: "Zobrazit levé body čočky",
+          en: "Show left points of lens"
+        },
+        "showLenFocus": {
+          cs: "Zobrazit ohniska",
+          en: "Show focus points"
+        },
+        "showLenCenter": {
+          cs: "Zobrazit středy kružnic čočky",
+          en: "Show centers of lens circles"
         }
     };
     

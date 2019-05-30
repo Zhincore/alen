@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="height=device-height, initial-scale=1.0">
+  <link rel="stylesheet" href="lib/all.min.css">
   <link rel="stylesheet" href="style.css">
-  <title>Index</title>
+  <title>ALen</title>
 </head>
 <body>
   
@@ -24,8 +25,76 @@
     <input id="input-objectposx" type="range" max="332" min="48" step="1" value="48" autocomplete="off">
     
     <div id="inputgroup-lenradius">
-      <div><span class="trn" data-trn="focal distance">Ohnisková vzdálenost</span>: <input id="input-lenradius-num" type="number" max="1024" min="1" step="0.1" value="173">px</div>
-      <input id="input-lenradius" type="range" max="1024" min="1" step="0.1">
+      <div><span class="trn" data-trn="focal distance">Ohnisková vzdálenost</span>: <input id="input-lenradius-num" type="number" max="512" min="1" step="0.1" value="100">px</div>
+      <input id="input-lenradius" type="range" max="512" min="1" step="0.1">
+    </div>
+    
+    <div id="overlay-info">
+      <a href="javascript:void(0)" id="info-toggler"><i class="fas fa-info-circle"></i> <i class="fas fa-cog"></i></a>
+      <div id="info" style="display: none;">
+        <table id="info-table">
+          <thead>
+            <th><i class="fas fa-eye"></i></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </thead>
+          <tr>
+            <td><input type="checkbox" id="opt-show-radius"></td>
+            <th class="trn" data-trn="lenRadius">Poloměr čočky</th>
+            <td class="math-sign">r = </td>
+            <td class="math" id="output-radius">-1</td>
+            <td class="unit trn" data-trn="pixels">pixelů</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="opt-show-focus"></td>
+            <th class="trn" data-trn="focal distance">Ohnisková vzdálenost</th>
+            <td class="math-sign">f = </td>
+            <td class="math" id="output-focus">-1</td>
+            <td class="unit trn" data-trn="pixels">pixelů</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="opt-show-objpos"></td>
+            <th class="trn" data-trn="object distance">Předmětová vzdálenost</th>
+            <td class="math-sign">a = </td>
+            <td class="math" id="output-objpos">-1</td>
+            <td class="unit trn" data-trn="pixels">pixelů</td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" id="opt-show-imgpos"></td>
+            <th class="trn" data-trn="image distance">Obrazová vzdálenost</th>
+            <td class="math-sign">a' = </td>
+            <td class="math" id="output-imgpos">-1</td>
+            <td class="unit trn" data-trn="pixels">pixelů</td>
+          </tr>
+          <tr>
+            <td></td>
+            <th class="trn" data-trn="magnification">Poměr zvětšení</th>
+            <td class="math-sign">M = </td>
+            <td class="math" id="output-magnif">-1</td>
+            <td class="unit"></td>
+          </tr>
+        </table>
+        
+        <table id="options-table">
+          <tr style="display: none">
+            <th class="trn" data-trn="centre">Vystředit</th><td><input type="checkbox" id="opt-center"></td>
+          </tr>
+          <tr>
+            <th class="trn" data-trn="showLenCircles">Zobrazit kružnice čočky</th><td><input type="checkbox" id="opt-show-lenCircles"></td>
+          </tr>
+          <tr>
+            <th class="trn" data-trn="showLenLeftPoints">Zobrazit levé body čočky</th><td><input type="checkbox" id="opt-show-lenPointsLeft"></td>
+          </tr>
+          <tr>
+            <th class="trn" data-trn="showLenFocus">Zobrazit ohniska</th><td><input type="checkbox" id="opt-show-lenFocus"></td>
+          </tr>
+          <tr>
+            <th class="trn" data-trn="showLenCenter">Zobrazit středy kružnic čočky</th><td><input type="checkbox" id="opt-show-lenCenter"></td>
+          </tr>
+        </table>
+      </div>
     </div>
   </div>
   
