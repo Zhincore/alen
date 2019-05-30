@@ -226,7 +226,7 @@ $(document).ready(() => {
       
     }else{
       ctx.fillStyle = "red";
-      ctx.fillText('Nemohu vytvořit obraz', conf.c.x+32, conf.c.y+32);
+      ctx.fillText('Cannot create image', conf.c.x+32, conf.c.y+32);
     }
     
     //////
