@@ -147,10 +147,10 @@ $(document).ready(() => {
     .css("left", conf.c.x-32-87)
     .val()
   );
-  objectPosY = parseInt($("#input-objectposy")
+  /*objectPosY = parseInt($("#input-objectposy")
     .css("top", conf.c.y-32-127)
     .val()
-  );
+  );*/
   objectPosX = parseInt($("#input-objectposx")
     .css("top", conf.c.y-6.5)
     .val()
@@ -189,8 +189,8 @@ $(document).ready(() => {
     ctx.drawImage($("#img-tree")[0], objectPosX, conf.c.y-64-objectPosY, 32, 64);
     let image = genImage(
       radius/2, //f
-      -conf.c.x+objectPosX+16-objectPosY, //u
-      64+objectPosY //h0
+      -conf.c.x+objectPosX+16, //u
+      64 //h0
     );
 
     // Don't let the image of object teleport to outer space
