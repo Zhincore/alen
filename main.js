@@ -10,6 +10,8 @@ const conf = {
 }
 const defConf = Object.assign({}, conf);
 
+let showLenLeftPoints = $("#opt-show-lenPointsLeft")[0].checked;
+
 let radius = 64;
 let realRadius = 64;
 let objectPosY = 0;
@@ -113,13 +115,12 @@ function drawLen(ctx){
     ctx.globalAlpha = 1;
   }
   
-  let showLenLeftPoints = $("#opt-show-lenPointsLeft")[0].checked;
   if($("#opt-show-lenFocus")[0].checked){
     ctx.fillStyle = $("#opt-show-lenFocus").css("border-left-color");
     ctx.fill(lenFocusLeft);
     ctx.fillText('F', lenFocusLeft.pos.x+8, lenFocusLeft.pos.y+16);
     if(showLenLeftPoints){
-      ctx.globalAlpha = 0.5;
+      ctx.globalAlpha = 0.75;
       ctx.fill(lenFocusRight);
       ctx.fillText('F\'', lenFocusRight.pos.x+8, lenFocusRight.pos.y+16);
       ctx.globalAlpha = 1;
@@ -131,7 +132,7 @@ function drawLen(ctx){
     ctx.fill(lenCenterLeft);
     ctx.fillText('S', lenCenterLeft.pos.x+8, lenCenterLeft.pos.y+16);
     if(showLenLeftPoints){
-      ctx.globalAlpha = 0.5;
+      ctx.globalAlpha = 0.75;
       ctx.fill(lenCenterRight);
       ctx.fillText('S\'', lenCenterRight.pos.x+8, lenCenterRight.pos.y+16);
       ctx.globalAlpha = 1;
@@ -311,12 +312,14 @@ $(document).ready(() => {
         ctx.lineTo(lenCenterLeft.pos.x+pp[0], lenCenterLeft.pos.y+pp[1]);
         ctx.stroke();
         ctx.fillText('r', lenCenterLeft.pos.x+pp[0]/2-16, lenCenterLeft.pos.y+pp[1]/2+16);
-
-        ctx.beginPath();
-        ctx.moveTo(lenCenterRight.pos.x, lenCenterRight.pos.y);
-        ctx.lineTo(lenCenterRight.pos.x+pp[0], lenCenterRight.pos.y+pp[1]);
-        ctx.stroke();
-        ctx.fillText('r\'', lenCenterRight.pos.x+pp[0]/2-16, lenCenterRight.pos.y+pp[1]/2+16);
+        
+        if(showLenLeftPoints){
+          ctx.beginPath();
+          ctx.moveTo(lenCenterRight.pos.x, lenCenterRight.pos.y);
+          ctx.lineTo(lenCenterRight.pos.x+pp[0], lenCenterRight.pos.y+pp[1]);
+          ctx.stroke();
+          ctx.fillText('r\'', lenCenterRight.pos.x+pp[0]/2-16, lenCenterRight.pos.y+pp[1]/2+16);
+        }
       }
       
       if($("#opt-show-focus")[0].checked){
@@ -327,11 +330,13 @@ $(document).ready(() => {
         ctx.stroke();
         ctx.fillText('f', conf.c.x+(lenFocusLeft.pos.x-conf.c.x)/2, conf.c.y+16);
 
-        ctx.beginPath();
-        ctx.moveTo(lenFocusRight.pos.x, lenFocusRight.pos.y);
-        ctx.lineTo(conf.c.x, conf.c.y);
-        ctx.stroke();
-        ctx.fillText('f\'', conf.c.x+(lenFocusRight.pos.x-conf.c.x)/2, conf.c.y+16);
+        if(showLenLeftPoints){
+          ctx.beginPath();
+          ctx.moveTo(lenFocusRight.pos.x, lenFocusRight.pos.y);
+          ctx.lineTo(conf.c.x, conf.c.y);
+          ctx.stroke();
+          ctx.fillText('f\'', conf.c.x+(lenFocusRight.pos.x-conf.c.x)/2, conf.c.y+16);
+        }
       }
       
       if($("#opt-show-objpos")[0].checked){
@@ -372,7 +377,9 @@ $(document).ready(() => {
 $("#info-toggler").click(() =>{
   $("#info").stop().slideToggle();
 });
-
+$("#opt-show-lenPointsLeft").on("change input", () => {
+  showLenLeftPoints = $("#opt-show-lenPointsLeft")[0].checked;
+});
 
 $("#input-lang").on("input change", ()=>{
   lang = $("#input-lang").val();
